@@ -1,5 +1,4 @@
 class Battleship
-    # attr_reader :player_input
 
     def initialize
         start_game_sequence
@@ -19,7 +18,7 @@ class Battleship
     end
 
     def instructions
-        p "The goal of this game is to be the first to sink all of your opponent's ships"
+        p "The goal of this game is to be the first to sink all of your opponent's ships."
     end
 
     def exit_game

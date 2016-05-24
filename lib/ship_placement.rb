@@ -1,59 +1,64 @@
 class ShipPlacement
+  # include Board
+  attr_reader :positions_available
 
-
-  def assign_ship_first_position
-    cols = [1, 2, 3, 4]
-    rows = ["A", "B", "C", "D"]
-    ship1_unit1_col = rand(1..4).to_s
-    ship1_unit1_row = rows.sample
-    ship1_unit1 = ship1_unit1_col.prepend(rows.sample)
-    p ship1_unit1
-    assign_ship_second_position
+  def initialize
+    @cols = [1, 2, 3, 4]
+    @rows = ["A", "B", "C", "D"]
+    @board = [["A1", "A2", "A3", "A4"],
+              ["B1", "B2", "B3", "B4"],
+              ["C1", "C2", "C3", "C4"],
+              ["D1", "D2", "D3", "D4"]]
   end
 
-  def assign_ship_second_position
-    b = ["col", "row"]
-    c = b.sample
-    assign_ship_second_row if c == "col"
-    assign_ship_second_col if c == "row"
+  def assign_ship1_unit1
+    positions_available = @board.flatten
+    ship1_unit1 = positions_available.shuffle.sample
+    assign_ship_unit2(ship1_unit1)
   end
 
-  def assign_ship_second_row
+  def assign_ship1_unit2(ship1_unit1)
+    unchanged_axis = ["col", "row"].sample
+    assign_ship1_unit2_row(ship1_unit1) if unchanged_axis == "col"
+    assign_ship1_unit2_col(ship1_unit1) if unchanged_axis == "row"
+  end
+
+  def assign_ship1_unit2_row(ship1_unit1)
     ship1_unit2_col = ship1_unit1[1]
-    # #row can be -1 or +1 of current row
-    # #if row is current row is A then it can only be +1
-    # #if row is current row is D then it can only be -1
-    if ship1_unit1[0] == "A" :  ship1_unit2_row = "B"
-    if ship1_unit1[0] == "D" :  ship1_unit2_row = "B"
-    else value could be +1 or -1
+    if ship1_unit1[0] == @rows[0]
+      ship1_unit2_row = @rows[1]
+    elsif ship1_unit1[0] == @rows[-1]
+      ship1_unit2_row = @rows[-2]
+    else #ship1_unit1 is on B or C
+    index = @rows.index(ship1_unit1[0])
+    possible_rows = [-1, 1]
+    ship1_unit2_row = @rows[index + possible_rows.sample]
+    end
+    ship1_unit1_coordinates(ship1_unit1, ship1_unit2_row, ship1_unit2_col)
   end
 
-  def assign_ship_second_col
+  def assign_ship1_unit2_col(ship1_unit1)
     ship1_unit2_row = ship1_unit1[0]
+    if ship1_unit1[0] == @cols[0]
+      ship1_unit2_col = @cols[1]
+    elsif ship1_unit1[0] == @cols[-1]
+      ship1_unit2_col = @cols[-2]
+    else #ship1_unit1 is on B or C
+    index = @cols.index(ship1_unit1[1])
+    possible_rows = [-1, 1]
+    ship1_unit2_row = @cols[index + possible_rows.sample]
+    end
+    ship1_unit1_coordinates(ship1_unit1, ship1_unit2_row, ship1_unit2_col)
   end
 
-# col = [1, 2, 3, 4]
-# rows = ["A", "B", "C", "D"]
-# positions_taken #array with occupied positions
-#
-# # ship1 is an array with two elements
-# ship1_unit1 = rand(1..4).to_s
-# ship1_unit1.prepend(rows.sample)
-#
-
-#
-
-#
-# #row can be -1 or +1 of current row
-# #if row is current row is A then it can only be +1
-# #if row is current row is D then it can only be -1
-#
-#
-#
-#
-#
-# #generate 2 units long ship
-# # ship2 is an array with 3 elements
+  def ship1_unit1_coordinates(ship1_unit1, ship1_unit2_row, ship1_unit2_col)
+    ship1_unit2 = []
+    ship1_unit2 << ship1_unit2_col
+    ship1_unit2 << ship1_unit2_row
+    ship1_unit2 = ship1_uni2.join
+    p ship1_unit1
+    p ship1_unit2
+  end
 
 
 end
