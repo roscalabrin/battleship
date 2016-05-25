@@ -14,11 +14,17 @@ class GameGrid
 
   def print_grid
     rows = []
-    # rows << @row_A
-    # rows << @row_B
-    # rows << @row_C
-    # rows << @row_D
 
+    # row1 = ['A', "-", "-", "-", "-"]
+    # row2 = ['B', "-", "-", "-", "-"]
+    # row3 = ['C', "-", "-", "-", "-"]
+    # row4 = ['D', "-", "-", "-", "-"]
+    #
+    # rows << row1
+    # rows << row2
+    # rows << row3
+    # rows << row4
+    #
     rows << ['A', "-", "-", "-", "-"]
     rows << ['B', "-", "-", "-", "-"]
     rows << ['C', "-", "-", "-", "-"]
