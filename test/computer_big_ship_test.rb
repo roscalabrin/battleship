@@ -12,10 +12,23 @@ class ComputerBigShipTest < MiniTest::Test
   def test_vertical_big_ship_is_placed_on_the_board
     binding.pry
     big_ship = ComputerBigShip.new
-
     big_ship.ship_alignment
 
     assert 3, big_ship.vertical_ship
+  end
+
+  def test_horizontal_big_ship_is_placed_on_the_board
+    big_ship = ComputerBigShip.new
+    big_ship.ship_alignment
+
+    assert 3, big_ship.horizontal_ship
+  end
+
+  def test_horizontal_big_ship_is_placed_on_the_board
+    big_ship = ComputerBigShip.new
+    big_ship.ship_alignment
+
+    assert 3, big_ship.horizontal_ship
   end
 
 

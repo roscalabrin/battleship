@@ -26,6 +26,24 @@ attr_reader   :player_small_ship,
     check_for_selection_errors(player_input)
   end
 
+  def validate_player_input
+
+  end
+
+  def check_for_selection_errors(player_input)
+    @positions_available = @board.flatten
+      if @positions_available.include?(player_input[0]) == false
+       outside_board
+     elsif @positions_available.include?(player_input[1]) == false
+       outside_board
+      elsif player_input[0] == player_input[1]
+       duplicate_positions
+      else
+      return true
+      validation_two_units_ship(player_input)
+    end
+  end
+
   def check_for_selection_errors(player_input)
     @positions_available = @board.flatten
       if @positions_available.include?(player_input[0]) == false
@@ -58,17 +76,17 @@ attr_reader   :player_small_ship,
 
   def diagnonal_error
     p "Your ships need to be laid either horizontally or vertically."
-    try_again
+    # try_again
   end
 
   def outside_board
     p "You've placed your ship outside the board. Please try again."
-    try_again
+    # try_again
   end
 
   def duplicate_positions
     p "You need to select two different squares for your ship. Please try again."
-    try_again
+    # try_again
   end
 
   def try_again

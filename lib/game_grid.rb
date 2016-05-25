@@ -43,11 +43,6 @@ end
 #     puts r.map { |p| p }.join("  ")
 #   end
 #
-# #   board = Array.new(4) { Array.new(4, "-") }
-# #   board.each do |r|
-# #     puts r.map { |p| p }.join("  ")
-# #   end
-# # end
 #
 #
 # board = [["A1", "A2", "A3", "A4"],
@@ -57,18 +52,3 @@ end
 #
 #           board.index("D2")
 #
-#
-#
-#
-# arr = [[" ", "1", "2", "3", "4"], ["A"], ["B"], ["C"], ["D"]]
-#
-#
-# arr.each do |inner|
-#   p inner.join(" ") # Or empty string if you don't want spaces.
-# end
-#
-# # print_board
-#
-# # board.each do |r|
-# #   puts r.map { |p| " " }.join(" ")
-# # end
