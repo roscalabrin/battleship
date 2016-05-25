@@ -11,23 +11,30 @@ attr_reader :player_big_ship
 
   def player_big_ship_placement
     p "Enter the squares for the three-unit ship:"
-    player_input = gets.chomp.to_s.upcase.split
-    # exit_game if player_input == 'Q' || player_input == 'QUIT'
-    check_for_selection_errors(player_input)
+    player_input = gets.chomp.to_s.upcase
+    if player_input == 'Q' || player_input == 'QUIT'
+      exit_game
+    else
+      player_input = player_input.split
+      check_for_selection_errors(player_input)
+    end
   end
 
   def check_for_selection_errors(player_input)
-    if @player_small_ship.include?(player_input[0]) == true
-      overlap_error
-    elsif @player_small_ship.include?(player_input[1]) == true
-      overlap_error
-    elsif @player_small_ship.include?(player_input[2]) == true
-      overlap_error
-    elsif player_input[0] == player_input[1] || player_input[0] == player_input[2] || player_input[1] == player_input[2]
-      duplicate_positions
-    else
-      check_if_it_is_outside(player_input)
-    end
+    p"test"
+    p @player_small_ship
+    p"test"
+    # if @player_small_ship.include?(player_input[0]) == true
+    #   overlap_error
+    # elsif @player_small_ship.include?(player_input[1]) == true
+    #   overlap_error
+    # elsif @player_small_ship.include?(player_input[2]) == true
+    #   overlap_error
+    # elsif player_input[0] == player_input[1] || player_input[0] == player_input[2] || player_input[1] == player_input[2]
+    #   duplicate_positions
+    # else
+    #   check_if_it_is_outside(player_input)
+    # end
   end
 
   def check_if_it_is_outside(player_input)
@@ -60,13 +67,6 @@ attr_reader :player_big_ship
     end
   end
 
-  def player_big_ship_placement
-    p "Enter the squares for the three-unit ship:"
-    player_input = gets.chomp.to_s.upcase.split
-    # exit_game if player_input == 'Q' || player_input == 'QUIT'
-    check_for_selection_errors(player_input)
-  end
-
   def diagnonal_error
     p "Your ships need to be laid either horizontally or vertically."
     try_again
@@ -91,6 +91,10 @@ attr_reader :player_big_ship
     p "Enter the squares for the three-unit ship:"
     player_input = gets.chomp.to_s.upcase.split
     check_for_selection_errors(player_input)
+  end
+
+  def exit_game
+    p 'Goodbye!'
   end
 
 end

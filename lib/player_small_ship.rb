@@ -1,10 +1,12 @@
 require_relative 'player_big_ship'
 
 class PlayerSmallShip
-attr_reader :player_small_ship,
-            :positions_available
+attr_reader   :player_small_ship,
+              :positions_available
 
   def initialize
+    @player_small_ship
+    @positions_available
     @board             = [["A1", "A2", "A3", "A4"],
                           ["B1", "B2", "B3", "B4"],
                           ["C1", "C2", "C3", "C4"],
@@ -13,7 +15,7 @@ attr_reader :player_small_ship,
   end
 
   def player_small_ship_placement
-    positions_available = @board.flatten
+    @positions_available = @board.flatten
     p "I have laid out my ships on the grid."
     p "You now need to layout your two ships."
     p "The first is two units long and the second is three units long."
@@ -25,10 +27,10 @@ attr_reader :player_small_ship,
   end
 
   def check_for_selection_errors(player_input)
-    positions_available = @board.flatten
-      if positions_available.include?(player_input[0]) == false
+    @positions_available = @board.flatten
+      if @positions_available.include?(player_input[0]) == false
        outside_board
-     elsif positions_available.include?(player_input[1]) == false
+     elsif @positions_available.include?(player_input[1]) == false
        outside_board
       elsif player_input[0] == player_input[1]
        duplicate_positions
@@ -45,11 +47,10 @@ attr_reader :player_small_ship,
 
   def validation_two_units_ship(player_input)
     if player_input[0][0] == player_input[1][0] || player_input[0][1] ==      player_input[1][1]
-      player_small_ship = player_input
-      positions_available = @board.flatten
-      positions_available.delete(player_input[0])
-      positions_available.delete(player_input[1])
-      # PlayerBigShip.new(player_small_ship, positions_available)
+      @player_small_ship = player_input
+      @positions_available = @board.flatten
+      @positions_available.delete(player_input[0])
+      @positions_available.delete(player_input[1])
     else
       check_for_diagnonal_position(player_input)
     end
