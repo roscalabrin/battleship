@@ -10,7 +10,7 @@ class BattleshipTest < MiniTest::Test
     assert_equal "The goal of this game is to be the first to sink all of your opponent's ships.", game.instructions
   end
 
-  def test_exiting_the_game
+  def test_invalid_choice
     game = Battleship.new
     game.exit_game
 

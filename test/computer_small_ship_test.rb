@@ -1,21 +1,27 @@
 require './test/test_helper'
 require './lib/computer_small_ship'
 
-class SmallShipTest < MiniTest::Test
+class ComputerSmallShipTest < MiniTest::Test
 
   def test_small_ship_is_created
-    small_ship = SmallShip.new(["B2", "B3", "B4"])
+    computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
 
-    assert small_ship
+    assert computer_ship
   end
 
-  def test_that_ships_do_not_overlap
+  # def test_that_ships_do_not_overlap
+  #   computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
+  #
+  #   refute ["B2", "B3", "B4"] == computer_ship.small_ship_position
+  # end
+
+  def test_both_small_and_big_ships_were_placed_on_the_board
     binding.pry
-    small_ship = SmallShip.new(["B2", "B3", "B4"])
+    computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
+    computer_ship.validate_ship_unit2("C1", "C2")
 
-    refute ["B2", "B3", "B4"] == small_ship.small_ship_position
+    assert 5, computer_ship.validate_ship_unit2("C1", "C2")
   end
-
 
 
 
