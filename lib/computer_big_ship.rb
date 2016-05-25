@@ -1,6 +1,7 @@
-require_relative 'small_ship'
+require_relative 'computer_small_ship'
+# require_relative 'ship_placement'
 
-class BigShip
+class ComputerBigShip
   attr_reader :big_ship_position
 
   def initialize
@@ -44,7 +45,7 @@ class BigShip
   end
 
   def place_small_ship(big_ship_position)
-    SmallShip.new(big_ship_position)
+    ComputerSmallShip.new(big_ship_position)
   end
 
 end

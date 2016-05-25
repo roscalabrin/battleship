@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/big_ship'
+require './lib/computer_big_ship'
 
 class BigShipTest < MiniTest::Test
 

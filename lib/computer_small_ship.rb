@@ -1,6 +1,6 @@
-require_relative 'game'
+# require_relative 'game'
 
-class SmallShip
+class ComputerSmallShip
   attr_reader :small_ship_position
 
   def initialize(big_ship_position)
@@ -70,9 +70,9 @@ class SmallShip
       small_ship_position[1]
       assign_small_ship_unit1
     else
-      # p small_ship_position
-      # p @big_ship_position
-      Game.new
+      p small_ship_position
+      p @big_ship_position
+      # Game.new
     end
   end
 

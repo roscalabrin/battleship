@@ -1,4 +1,4 @@
-require_relative 'big_ship'
+require_relative 'computer_big_ship'
 
 class Battleship
 
@@ -20,7 +20,7 @@ class Battleship
   end
 
   def start_game_sequence_input(player_input)
-      BigShip.new  if player_input == 'p' || player_input == 'play'
+      ComputerBigShip.new  if player_input == 'p' || player_input == 'play'
       instructions if player_input == 'i' || player_input == 'instructions'
       exit_game    if player_input == 'q' || player_input == 'quit'
   end
