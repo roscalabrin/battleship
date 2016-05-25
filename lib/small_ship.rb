@@ -1,31 +1,36 @@
-class ShipPlacement
 
+class SmallShip
+  attr_reader :small_ship_position
 
-  def board
-    @board = [["A1", "A2", "A3", "A4"],
-              ["B1", "B2", "B3", "B4"],
-              ["C1", "C2", "C3", "C4"],
-              ["D1", "D2", "D3", "D4"]]
+  def initialize(big_ship_position)
+    @big_ship_position = big_ship_position
+    @cols              = ["1", "2", "3", "4"]
+    @rows              = ["A", "B", "C", "D"]
+    @board             = [["A1", "A2", "A3", "A4"],
+                          ["B1", "B2", "B3", "B4"],
+                          ["C1", "C2", "C3", "C4"],
+                          ["D1", "D2", "D3", "D4"]]
+    small_ship_unit1
   end
 
-    assign_ship1_unit1
-  end
-
-  def assign_ship1_unit1
+  def small_ship_unit1
     positions_available = @board.flatten
-    ship1_unit1 = positions_available.shuffle.sample
-    assign_ship1_unit2(ship1_unit1)
+    positions_available.delete(@big_ship_position[0])
+    positions_available.delete(@big_ship_position[1])
+    positions_available.delete(@big_ship_position[2])
+    small_ship_unit1    = positions_available.sample
+    small_ship_unit2(small_ship_unit1)
   end
 
-  def assign_ship1_unit2(ship1_unit1)
+  def assign_ship1_unit2(small_ship_unit1)
     unchanged_axis = ["col", "row"].sample
-    assign_ship1_unit2_row(ship1_unit1) if unchanged_axis == "col"
-    assign_ship1_unit2_col(ship1_unit1) if unchanged_axis == "row"
+    assign_ship1_unit2_row(small_ship_unit1) if unchanged_axis == "col"
+    assign_ship1_unit2_col(small_ship_unit1) if unchanged_axis == "row"
   end
 
   def assign_ship1_unit2_row(ship1_unit1)
-    ship1_unit2_col = ship1_unit1[1]
-    if ship1_unit1[0] == @rows[0]
+    small_ship_unit2_col = ship1_unit1[1]
+    if small_ship_unit1[0] == @rows[0]
       ship1_unit2_row = @rows[1]
     elsif ship1_unit1[0] == @rows[-1]
       ship1_unit2_row = @rows[-2]
@@ -55,10 +60,10 @@ class ShipPlacement
     ship1_unit2 = Array.new << ship1_unit2_row
     ship1_unit2 << ship1_unit2_col
     ship1_unit2 = ship1_unit2.join
-    ship1_coord = Array.new << ship1_unit1 << ship1_unit2
-  end
-
-  def count
+    small_ship_position = Array.new << ship1_unit1 << ship1_unit2
+    p "test"
+    p small_ship_position
+    p big_ship_position
   end
 
 
