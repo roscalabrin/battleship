@@ -14,7 +14,3 @@ class ShipPlacement
   end
 
 end
-
-# board.each do |r|
-#   puts r.map { |p| " " }.join(" ")
-# end
