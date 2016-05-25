@@ -51,10 +51,10 @@ attr_reader :player_big_ship
   def validation_three_units_ship(player_input)#revise
     if player_input[0][0] == player_input[1][0] && player_input[1][0]== player_input[2][0]
       player_big_ship = player_input
-      Game.new
+      # Game.new
     elsif player_input[0][1] == player_input[1][1] && player_input[1][1] == player_input[2][1]
       player_big_ship = player_input
-      Game.new
+      # Game.new
     else
       check_for_diagnonal_position(player_input)
     end

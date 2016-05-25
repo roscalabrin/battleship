@@ -1,8 +1,8 @@
 require_relative 'player_big_ship'
 
 class PlayerSmallShip
-attr_reader :player_small_ship
-            :player_big_ship
+attr_reader :player_small_ship,
+            :positions_available
 
   def initialize
     @board             = [["A1", "A2", "A3", "A4"],
@@ -49,7 +49,7 @@ attr_reader :player_small_ship
       positions_available = @board.flatten
       positions_available.delete(player_input[0])
       positions_available.delete(player_input[1])
-      PlayerBigShip.new(player_small_ship, positions_available)
+      # PlayerBigShip.new(player_small_ship, positions_available)
     else
       check_for_diagnonal_position(player_input)
     end
