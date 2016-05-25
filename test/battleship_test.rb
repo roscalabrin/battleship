@@ -3,13 +3,6 @@ require './lib/battleship'
 
 class BattleshipTest < MiniTest::Test
 
-  def test_start_game_sequence 
-    skip
-    game = Battleship.new
-
-    assert_equal possible_inputs.include?(player_input), player_input
-  end
-
   def test_printing_instructions_to_screen
     game = Battleship.new
     game.instructions

@@ -1,5 +1,11 @@
 require_relative 'big_ship'
 
+class Battleship
+
+  def initialize
+    start_game_sequence
+  end
+
   def start_game_sequence
       p 'Welcome to BATTLESHIP'
       p 'Would you like to (p)lay, read the (i)nstructions, or (q)uit?'
@@ -28,4 +34,15 @@ require_relative 'big_ship'
       p 'Goodbye!'
   end
 
-start_game_sequence
+  def player_ship_placement
+    p "I have laid out my ships on the grid."
+    p "You now need to layout your two ships."
+    p "The first is two units long and the second is three units long."
+    p "The grid has A1 at the top left and D4 at the bottom right."
+    p "Enter the squares for the two-unit ship:"
+    player_input = gets.chomp.to_s.upcase
+  end
+end
+
+# start_game_sequence
+Battleship.new
