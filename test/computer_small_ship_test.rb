@@ -16,7 +16,6 @@ class ComputerSmallShipTest < MiniTest::Test
   # end
 
   def test_both_small_and_big_ships_were_placed_on_the_board
-    binding.pry
     computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
     computer_ship.validate_ship_unit2("C1", "C2")
 

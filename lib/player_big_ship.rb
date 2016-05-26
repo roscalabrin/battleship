@@ -1,4 +1,3 @@
-require_relative 'game'
 
 class PlayerBigShip
 attr_reader :player_big_ship
@@ -21,20 +20,17 @@ attr_reader :player_big_ship
   end
 
   def check_for_selection_errors(player_input)
-    p"test"
-    p @player_small_ship
-    p"test"
-    # if @player_small_ship.include?(player_input[0]) == true
-    #   overlap_error
-    # elsif @player_small_ship.include?(player_input[1]) == true
-    #   overlap_error
-    # elsif @player_small_ship.include?(player_input[2]) == true
-    #   overlap_error
-    # elsif player_input[0] == player_input[1] || player_input[0] == player_input[2] || player_input[1] == player_input[2]
-    #   duplicate_positions
-    # else
-    #   check_if_it_is_outside(player_input)
-    # end
+    if @player_small_ship.include?(player_input[0]) == true
+      overlap_error
+    elsif @player_small_ship.include?(player_input[1]) == true
+      overlap_error
+    elsif @player_small_ship.include?(player_input[2]) == true
+      overlap_error
+    elsif player_input[0] == player_input[1] || player_input[0] == player_input[2] || player_input[1] == player_input[2]
+      duplicate_positions
+    else
+      check_if_it_is_outside(player_input)
+    end
   end
 
   def check_if_it_is_outside(player_input)

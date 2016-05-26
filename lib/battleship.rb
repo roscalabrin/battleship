@@ -21,7 +21,7 @@ class Battleship
 
   def start_game_sequence_input(player_input)
     if player_input == 'P' || player_input == 'PLAY'
-      game = Game.new
+      Game.new
     elsif player_input == 'I' || player_input == 'INSTRUCTIONS'
       instructions
     elsif player_input == 'Q' || player_input == 'QUIT'
@@ -48,5 +48,7 @@ class Battleship
 end
 
 if __FILE__ == $0
-  battleship = Battleship.new
+  Battleship.new
 end
+#
+# Battleship.new
