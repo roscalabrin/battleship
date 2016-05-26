@@ -5,13 +5,13 @@ class PlayerShot
   attr_reader :next_shot
 
   def initialize(player_shot, computer_big_ship, computer_small_ship, player_big_ship, player_small_ship)
-    @player_shot         = player_shot
-    @computer_big_ship   = computer_big_ship
-    @computer_small_ship = computer_small_ship
-    @player_big_ship     = player_big_ship
-    @player_small_ship   = player_small_ship
-    @player_shots_counter = 0
-    @player_shots_tracker = []
+    @player_shot            = player_shot
+    @computer_big_ship      = computer_big_ship
+    @computer_small_ship    = computer_small_ship
+    @player_big_ship        = player_big_ship
+    @player_small_ship      = player_small_ship
+    @player_shots_counter   = 0
+    @player_shots_tracker   = []
     @computer_shots_tracker = []
     @row_A = ['A', "-", "-", "-", "-"]
     @row_B = ['B', "-", "-", "-", "-"]
@@ -24,9 +24,11 @@ class PlayerShot
     valid_shot?
   end
 
+
   def valid_shot?
     invalid_shot if @player_shot.size != 2
     within_the_board?
+    p "hi"
   end
 
   def within_the_board?
@@ -110,24 +112,31 @@ class PlayerShot
       @row_D.delete_at(@player_shot[1].to_i)
       @row_D.insert(@player_shot[1].to_i, miss_or_hit)
     end
-    GameGrid.new(@row_A, @row_B, @row_C, @row_D, "Battleship - Computer's Board")
+    GameGrid.new(@row_A, @row_B, @row_C, @row_D, "Battleship - Player's Board")
     computer_turn
   end
 
   def try_again #invalid shots
     p "What position do you want to fire?"
-    player_shot = gets.chomp.to_s.upcase
+    @player_shot = gets.chomp.to_s.upcase
+    valid_shot?
   end
 
   def next_shot
-    p "Testing"
-    # player_shot = gets.chomp.to_s.upcase
+    p "What is the next position do you want to fire?"
+    @player_shot = gets.chomp.to_s.upcase
+    p @row_A
+    p @row_B
+    p @row_C
+    p @row_D
+    valid_shot?
   end
 
   def computer_turn
     @player_shots_counter += 1
     @player_shots_tracker << @player_shot
     computer_shot = ComputerShot.new(@computer_big_ship, @computer_small_ship, @player_big_ship, @player_small_ship)
+    next_shot
   end
 
 

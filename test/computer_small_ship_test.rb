@@ -9,11 +9,12 @@ class ComputerSmallShipTest < MiniTest::Test
     assert computer_ship
   end
 
-  # def test_that_ships_do_not_overlap
-  #   computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
-  #
-  #   refute ["B2", "B3", "B4"] == computer_ship.small_ship_position
-  # end
+  def test_that_ships_do_not_overlap
+    computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])
+    computer_ship.small_ship_position
+
+    refute ["B2", "B3", "B4"] == computer_ship.small_ship_position
+  end
 
   def test_both_small_and_big_ships_were_placed_on_the_board
     computer_ship = ComputerSmallShip.new(["B2", "B3", "B4"])

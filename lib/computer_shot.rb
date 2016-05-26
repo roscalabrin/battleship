@@ -87,19 +87,14 @@ class ComputerShot
       @row_B.insert(@computer_shot[1].to_i, miss_or_hit)
     elsif @computer_shot[0] === "C"
       @row_C.delete_at(@computer_shot[1].to_i)
-      @row_C.insert(@player_shot[1].to_i, miss_or_hit)
+      @row_C.insert(@computer_shot[1].to_i, miss_or_hit)
     elsif @computer_shot[0] === "D"
       @row_D.delete_at(@computer_shot[1].to_i)
       @row_D.insert(@computer_shot[1].to_i, miss_or_hit)
     end
     GameGrid.new(@row_A, @row_B, @row_C, @row_D, "Battleship - Computer's Board")
-    # player_turn
   end
 
-
-  # def player_turn
-  #   p "Now it's your turn again"
-  # end
 
 
 end

@@ -23,6 +23,3 @@ class GameGrid
   end
 
 end
-
-# table = Terminal::Table.new :title => "Battleship", :headings => [' ', '1', '2', '3', '4'], :rows => rows
-# puts table

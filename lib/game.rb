@@ -25,9 +25,7 @@ class Game < GameGrid
   def player_ship_placement
     player_ships = PlayerShips.new
     @player_big_ship = player_ships.big_ship_coord
-    # p @player_big_ship
     @player_small_ship = player_ships.small_ship_coord
-    # p @player_big_ship
     player_first_shot_sequence
   end
 
