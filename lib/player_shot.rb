@@ -1,5 +1,7 @@
+require_relative 'game_grid'
 
 class PlayerShot
+  attr_accessor :player_guesses
 
   def initialize(player_shot, computer_big_ship, computer_small_ship, player_big_ship, player_small_ship)
     @player_shot         = player_shot
@@ -7,31 +9,50 @@ class PlayerShot
     @computer_small_ship = computer_small_ship
     @player_big_ship     = player_big_ship
     @player_small_ship   = player_small_ship
-    compares_with_computer_small_ship
+    @shots_counter = 0
+    @shots_tracker = []
+    @row_A = ['A', "-", "-", "-", "-"]
+    @row_B = ['B', "-", "-", "-", "-"]
+    @row_C = ['C', "-", "-", "-", "-"]
+    @row_D = ['D', "-", "-", "-", "-"]
+    valid_shot?
   end
 
-  def compares_with_computer_small_ship
-    check_small_ship if @computer_small_ship.include?(@player_shot)
-    compares_with_computer_big_ship
+  def valid_shot?
+    invalid_shot if @player_shot.size != 2
+    hit_small_ship?
+    within_the_board?
   end
 
-  def check_small_ship
-    @computer_small_ship.delete(@player_input)
-    if @computer_small_ship.empty?
-      sunk_small_ship_message
+  def within_the_board?
+    board = [["A1", "A2", "A3", "A4"],
+              ["B1", "B2", "B3", "B4"],
+              ["C1", "C2", "C3", "C4"],
+              ["D1", "D2", "D3", "D4"]]
+    positions_available = board.flatten
+    if positions_available.include?(@player_shot) == false
+      outside_board
     else
-      hit_message
+      hit_small_ship?
     end
   end
 
-  def compares_with_computer_big_ship
-    check_big_ship if @computer_big_ship.include?(@player_shot)
+  def hit_small_ship?
+    ships_sunk? if @computer_small_ship.include?(@player_shot)
+    hit_big_ship?
+  end
+
+  def hit_big_ship?
+    ships_sunk? if @computer_big_ship.include?(@player_shot)
     miss_message
   end
 
-  def check_big_ship
-    @computer_big_ship.delete(@player_input)
-    if @computer_big_ship.empty?
+  def ships_sunk?
+    if @computer_small_ship.empty? && @computer_big_ship.empty?
+      p "end_of_game"
+    elsif @computer_small_ship.empty?
+      sunk_small_ship_message
+    elsif @computer_big_ship.empty?
       sunk_big_ship_message
     else
       hit_message
@@ -40,22 +61,62 @@ class PlayerShot
 
   def hit_message
     p "You hit an enemy ship!"
+    updated_board("H")
   end
 
   def sunk_small_ship_message
     p "You sunk your enemy's small ship!"
+    updated_board("H")
   end
 
   def sunk_big_ship_message
     p "You sunk your enemy's big ship!"
+    updated_board("H")
   end
 
   def miss_message
     p "You missed your enemy's ships."
+    updated_board("M")
   end
 
-  def updated_board
+  def outside_board
+    p "You've placed your ship outside the board. Please try again."
+    try_again
   end
+
+  def invalid_shot
+    p "Invalid shot. Please try again."
+  end
+
+  def updated_board(miss_or_hit)
+    if @player_shot[0] === "A"
+      @row_A.delete_at(@player_shot[1].to_i)
+      @row_A.insert(@player_shot[1].to_i, miss_or_hit)
+    elsif @player_shot[0] === "B"
+      @row_B.delete_at(@player_shot[1].to_i)
+      @row_B.insert(@player_shot[1].to_i, miss_or_hit)
+    elsif @player_shot[0] === "C"
+      @row_C.delete_at(@player_shot[1].to_i)
+      @row_C.insert(@player_shot[1].to_i, miss_or_hit)
+    elsif @player_shot[0] === "D"
+      @row_D.delete_at(@player_shot[1].to_i)
+      @row_D.insert(@player_shot[1].to_i, miss_or_hit)
+    end
+    GameGrid.new(@row_A, @row_B, @row_C, @row_D).print_grid
+    # next_shot
+  end
+
+  def next_shot
+    @shots_counter += 1
+    "test"
+  end
+
+  def try_again #invalid shots
+    p "What position do you want to fire?"
+    player_shot = gets.chomp.to_s.upcase
+  end
+
+
 
   # ComputerSequence
 
