@@ -14,12 +14,12 @@ class PlayerShips
   def place_player_ships
     small_ship = PlayerSmallShip.new
     @small_ship_coord = small_ship.player_small_ship
-
     player_small_ship = small_ship.player_small_ship
     positions_available = small_ship.positions_available
 
     big_ship = PlayerBigShip.new(player_small_ship, positions_available)
     @big_ship_coord = big_ship.player_big_ship
+    player_big_ship = big_ship.player_big_ship
   end
 
 end

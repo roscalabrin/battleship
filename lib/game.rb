@@ -25,15 +25,17 @@ class Game < GameGrid
   def player_ship_placement
     player_ships = PlayerShips.new
     @player_big_ship = player_ships.big_ship_coord
+    # p @player_big_ship
     @player_small_ship = player_ships.small_ship_coord
+    # p @player_big_ship
     player_first_shot_sequence
   end
 
   def player_first_shot_sequence
-    GameGrid.new.print_grid
+    GameGrid.new(['A', "-", "-", "-", "-"],['B', "-", "-", "-", "-"],['C', "-", "-", "-", "-"],['D', "-", "-", "-", "-"], "Battleship - Player's Board")
     p "What position do you want to fire?"
     player_shot = gets.chomp.to_s.upcase
-    PlayerShot.new(player_shot, @computer_big_ship, @computer_small_ship, @player_big_ship, @player_small_ship)
+    player_shots = PlayerShot.new(player_shot, @computer_big_ship, @computer_small_ship, @player_big_ship, @player_small_ship)
   end
 
 end

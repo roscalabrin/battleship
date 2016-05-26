@@ -1,7 +1,8 @@
 require_relative 'game_grid'
+require_relative 'computer_shot'
 
 class PlayerShot
-  attr_accessor :player_guesses
+  attr_reader :next_shot
 
   def initialize(player_shot, computer_big_ship, computer_small_ship, player_big_ship, player_small_ship)
     @player_shot         = player_shot
@@ -9,27 +10,27 @@ class PlayerShot
     @computer_small_ship = computer_small_ship
     @player_big_ship     = player_big_ship
     @player_small_ship   = player_small_ship
-    @shots_counter = 0
-    @shots_tracker = []
+    @player_shots_counter = 0
+    @player_shots_tracker = []
+    @computer_shots_tracker = []
     @row_A = ['A', "-", "-", "-", "-"]
     @row_B = ['B', "-", "-", "-", "-"]
     @row_C = ['C', "-", "-", "-", "-"]
     @row_D = ['D', "-", "-", "-", "-"]
+    @board = [["A1", "A2", "A3", "A4"],
+              ["B1", "B2", "B3", "B4"],
+              ["C1", "C2", "C3", "C4"],
+              ["D1", "D2", "D3", "D4"]]
     valid_shot?
   end
 
   def valid_shot?
     invalid_shot if @player_shot.size != 2
-    hit_small_ship?
     within_the_board?
   end
 
   def within_the_board?
-    board = [["A1", "A2", "A3", "A4"],
-              ["B1", "B2", "B3", "B4"],
-              ["C1", "C2", "C3", "C4"],
-              ["D1", "D2", "D3", "D4"]]
-    positions_available = board.flatten
+    positions_available = @board.flatten
     if positions_available.include?(@player_shot) == false
       outside_board
     else
@@ -38,18 +39,24 @@ class PlayerShot
   end
 
   def hit_small_ship?
-    ships_sunk? if @computer_small_ship.include?(@player_shot)
-    hit_big_ship?
+    if @computer_small_ship.include?(@player_shot)
+      ships_sunk?
+    else
+      hit_big_ship?
+    end
   end
 
   def hit_big_ship?
-    ships_sunk? if @computer_big_ship.include?(@player_shot)
-    miss_message
+    if @computer_big_ship.include?(@player_shot)
+      ships_sunk?
+    else
+      miss_message
+    end
   end
 
   def ships_sunk?
     if @computer_small_ship.empty? && @computer_big_ship.empty?
-      p "end_of_game"
+      p "Congrats! You've won Battleship!"
     elsif @computer_small_ship.empty?
       sunk_small_ship_message
     elsif @computer_big_ship.empty?
@@ -86,6 +93,7 @@ class PlayerShot
 
   def invalid_shot
     p "Invalid shot. Please try again."
+    try_again
   end
 
   def updated_board(miss_or_hit)
@@ -102,13 +110,8 @@ class PlayerShot
       @row_D.delete_at(@player_shot[1].to_i)
       @row_D.insert(@player_shot[1].to_i, miss_or_hit)
     end
-    GameGrid.new(@row_A, @row_B, @row_C, @row_D).print_grid
-    # next_shot
-  end
-
-  def next_shot
-    @shots_counter += 1
-    "test"
+    GameGrid.new(@row_A, @row_B, @row_C, @row_D, "Battleship - Computer's Board")
+    computer_turn
   end
 
   def try_again #invalid shots
@@ -116,8 +119,16 @@ class PlayerShot
     player_shot = gets.chomp.to_s.upcase
   end
 
+  def next_shot
+    p "Testing"
+    # player_shot = gets.chomp.to_s.upcase
+  end
 
+  def computer_turn
+    @player_shots_counter += 1
+    @player_shots_tracker << @player_shot
+    computer_shot = ComputerShot.new(@computer_big_ship, @computer_small_ship, @player_big_ship, @player_small_ship)
+  end
 
-  # ComputerSequence
 
 end
